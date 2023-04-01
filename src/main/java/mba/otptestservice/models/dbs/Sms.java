@@ -19,6 +19,13 @@ public class Sms {
     private Long id;
     @Column(name = "body")
     private String body;
+
+    @Column(name = "senderNumber")
+    private String senderNumber;
+
+    @Column(name="extractedCode")
+    private String extractedCode;
+
     @Column(name = "creationDt")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

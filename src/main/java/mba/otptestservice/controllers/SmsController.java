@@ -6,6 +6,7 @@ import mba.otptestservice.services.SmsService;
 import mba.otptestservice.utilities.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,11 @@ public class SmsController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody SmsView smsView) {
+    public ResponseEntity add(@RequestBody SmsView smsView) {
         smsService.save(ModelMapper.convertToModel(smsView, Sms.class));
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 
 }

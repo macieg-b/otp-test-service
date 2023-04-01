@@ -9,4 +9,5 @@ import lombok.*;
 @AllArgsConstructor
 public class SmsView {
     private String body;
+    private String senderNumber;
 }
