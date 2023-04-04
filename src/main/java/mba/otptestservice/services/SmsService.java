@@ -4,6 +4,7 @@ package mba.otptestservice.services;
 import mba.otptestservice.models.dbs.Sms;
 import mba.otptestservice.repositories.SmsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Matcher;
@@ -23,13 +24,17 @@ public class SmsService {
         smsRepository.save(sms);
     }
 
+    public Sms getLatest() {
+        return smsRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).get(0);
+    }
+
     private String extractCode(String message) {
         Pattern pattern = Pattern.compile("[0-9]{4,}");
         Matcher matcher = pattern.matcher(message);
-        while(matcher.find())
-        {
+        while (matcher.find()) {
             return (matcher.group());
         }
         return null;
     }
+
 }
