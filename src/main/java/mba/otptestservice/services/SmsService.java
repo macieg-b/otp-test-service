@@ -30,7 +30,7 @@ public class SmsService {
     }
 
     public List<Sms> getAll() {
-        return smsRepository.findAll();
+        return smsRepository.findAll(Sort.by(Sort.Direction.DESC, "creationDt"));
     }
 
     private String extractCode(String message) {

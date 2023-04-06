@@ -31,7 +31,7 @@ public class SmsController {
                 .build();
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/newest", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getLatest() {
         Sms sms = smsService.getLatest();
         return ResponseEntity
