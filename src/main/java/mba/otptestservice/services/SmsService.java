@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,10 @@ public class SmsService {
         return smsRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).get(0);
     }
 
+    public List<Sms> getAll() {
+        return smsRepository.findAll();
+    }
+
     private String extractCode(String message) {
         Pattern pattern = Pattern.compile("[0-9]{4,}");
         Matcher matcher = pattern.matcher(message);
@@ -36,5 +41,4 @@ public class SmsService {
         }
         return null;
     }
-
 }

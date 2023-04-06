@@ -9,6 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/sms")
 public class SmsController {
@@ -33,6 +36,17 @@ public class SmsController {
         Sms sms = smsService.getLatest();
         return ResponseEntity
                 .ok(sms.getExtractedCode());
+    }
+
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<SmsView>> getList() {
+        List<Sms> smsList = smsService.getAll();
+        return ResponseEntity
+                .ok(smsList
+                        .stream()
+                        .map(sms -> ModelMapper.convertToView(sms, SmsView.class))
+                        .collect(Collectors.toList())
+                );
     }
 
 }
